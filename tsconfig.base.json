@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@better-api/config": ["libs/config/src/index.ts"]
+      "@better-api/config": ["libs/config/src/index.ts"],
+      "@better-api/entities": ["libs/entities/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
