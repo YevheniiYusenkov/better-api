@@ -3,16 +3,18 @@ import { PassportStrategy } from '@nestjs/passport';
 
 import { Strategy } from 'passport-local';
 
+import { User } from '@better-api/entities';
+
 import { AuthService } from '../auth.service';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService) {
-    super();
+    super({ usernameField: 'phoneNumber', passwordField: 'password' });
   }
 
-  async validate(username: string, password: string): Promise<any> {
-    const user = await this.authService.validate(username, password);
+  async validate(phoneNumber: string, password: string): Promise<User> {
+    const user = await this.authService.validate(phoneNumber, password);
 
     if (!user) {
       throw new UnauthorizedException();
