@@ -24,7 +24,11 @@
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {}
+      "rules": {
+        "object-curly-spacing": ["error", "always"],
+        "array-bracket-spacing": ["error", "always"],
+        "comma-dangle": ["error", "always-multiline"]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
