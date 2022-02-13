@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "api-gateway": "apps/api-gateway",
-    "config": "libs/config"
+    "config": "libs/config",
+    "entities": "libs/entities"
   }
 }
