@@ -1,3 +1,4 @@
 export interface IGetUserPayload {
-  id: string;
+  id?: string;
+  phoneNumber?: string;
 }
