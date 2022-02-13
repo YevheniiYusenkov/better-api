@@ -2,30 +2,20 @@ import { Injectable } from '@nestjs/common';
 
 import { UsersService } from '../users/users.service';
 import { User } from '@better-api/entities';
+import { CryptoService } from '../crypto/crypto.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly cryptoService: CryptoService,
+  ) {}
 
-  public async validate(phoneNumber: string, password: string): Promise<User> {
-    const user = await this.usersService.user(
-      { phoneNumber },
-      {
-        select: [
-          'password',
-          'createdAt',
-          'updatedAt',
-          'phoneNumber',
-          'accounts',
-          'language',
-          'id',
-        ],
-    });
+  async validate(phoneNumber: string, password: string): Promise<User> {
+    const user = await this.usersService.user({ phoneNumber });
 
-    if (user && user.password === password) {
-      const { password, ...other } = user;
-
-      return other as User;
+    if (await this.cryptoService.compare(password, user?.password)) {
+      return user;
     }
 
     return null;
