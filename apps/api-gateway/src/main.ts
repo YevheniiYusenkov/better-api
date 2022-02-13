@@ -1,5 +1,5 @@
-import { INestApplication, Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { ClassSerializerInterceptor, INestApplication, Logger } from '@nestjs/common';
+import { NestFactory, Reflector } from '@nestjs/core';
 
 import { GatewayConfigService } from '@better-api/config';
 
@@ -11,6 +11,7 @@ async function bootstrap() {
   const config = app.get<GatewayConfigService>(GatewayConfigService);
 
   app.setGlobalPrefix('api');
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
   await app.listen(config.port);
 
