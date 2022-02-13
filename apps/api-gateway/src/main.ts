@@ -1,18 +1,21 @@
-import { Logger } from '@nestjs/common';
+import { INestApplication, Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+
+import { GatewayConfigService } from "@better-api/config";
 
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app: INestApplication = await NestFactory.create(AppModule);
+
+  const config = app.get<GatewayConfigService>(GatewayConfigService);
 
   app.setGlobalPrefix('api');
 
-  const port = process.env.PORT || 80;
-  await app.listen(port);
+  await app.listen(config.port);
 
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+    `🚀 Application is running on: ${config.protocol}://${config.host}:${config.port}/${config.prefix}`
   );
 }
 
