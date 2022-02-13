@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 import { CreateUserDTO } from './dto/create.dto';
 import { UsersService } from './users.service';
@@ -14,6 +15,7 @@ export class UsersController {
   }
 
   @Get()
+  @UseGuards(AuthGuard('local'))
   async user(@Query() payload: IGetUserPayload) {
     return await this.service.user(payload);
   }
