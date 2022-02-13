@@ -1,4 +1,5 @@
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -6,6 +7,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
+
 import { Account } from '../account';
 
 @Entity('user')
@@ -19,6 +22,7 @@ export class User {
   })
   phoneNumber: string;
 
+  @Exclude()
   @Column({
     name: 'password',
     nullable: false,
@@ -32,20 +36,20 @@ export class User {
   })
   language: string;
 
+  @Exclude()
   @Column({
     name: 'is_deleted',
     nullable: false,
     default: false,
-    select: false,
   })
   isDeleted: boolean;
 
+  @Exclude()
   @Column({
     name: 'deleted_at',
     type: 'datetime',
     nullable: true,
     default: null,
-    select: false,
   })
   deletedAt: Date;
 
