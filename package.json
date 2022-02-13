@@ -16,9 +16,11 @@
     "@nestjs/platform-socket.io": "^8.2.6",
     "@nestjs/typeorm": "^8.0.3",
     "@nestjs/websockets": "^8.2.6",
+    "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.0.0",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "typeorm": "^0.2.41"
   },
   "devDependencies": {
     "@nestjs/schematics": "^8.0.0",
